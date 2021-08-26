@@ -2,31 +2,7 @@ import React from "react";
 import { Box, Typography } from "@material-ui/core";
 import { FastField } from "formik";
 import { TextField } from "formik-material-ui";
-import { styled } from "@material-ui/styles";
-
-const Container = styled("section")(({ theme }) => ({
-  "& .MuiFormControl-root": {
-    "& .MuiOutlinedInput-input": {
-      paddingTop: "16px",
-      paddingBottom: "16px",
-      textTransform: "inherit",
-      color: "#fff",
-    },
-    "&:hover .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#fff",
-    },
-    "&:hover .MuiFormLabel-root": {
-      color: "#fff!important",
-    },
-    "& .MuiInputBase-root": {
-      borderRadius: "8px",
-      background: "#151515",
-      "&:hover": {
-        color: "#fff",
-      },
-    },
-  },
-}));
+import useStyles from "./style";
 
 export default function FormInput({
   name,
@@ -36,9 +12,9 @@ export default function FormInput({
   loading,
   ...restProps
 }) {
+  const classes = useStyles()
   return (
-    <Container>
-      <Box py={py}>
+      <Box py={py} className={classes.root}>
         <Typography paddingLeft={1} marginBottom={0.5}>
           {label}
         </Typography>
@@ -54,7 +30,6 @@ export default function FormInput({
           {...restProps}
         />
       </Box>
-    </Container>
   );
 }
 

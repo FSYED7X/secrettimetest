@@ -13,6 +13,11 @@ export default function App() {
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
+      secondary: {
+        main: '#F24462',
+        dark: '#F24462',
+        light: '#F24462',
+      }
     },
   });
 

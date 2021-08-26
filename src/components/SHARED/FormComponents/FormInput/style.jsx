@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -7,17 +7,20 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: "16px",
         paddingBottom: "16px",
         textTransform: "inherit",
+        color: "#fff",
+        fontSize: "14px",
       },
       "&:hover .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.primary.main,
+        borderColor: "#fff",
       },
       "&:hover .MuiFormLabel-root": {
-        color: theme.palette.primary.main + "!important",
+        color: "#fff!important",
       },
       "& .MuiInputBase-root": {
         borderRadius: "8px",
+        background: "#151515",
         "&:hover": {
-          color: theme.palette.primary.main,
+          color: "#fff",
         },
       },
     },

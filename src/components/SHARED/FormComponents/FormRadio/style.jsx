@@ -1,15 +1,19 @@
 import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
+    "& .MuiFormControlLabel-label": {
+      fontSize: "14px",
+    },
+    "& .Mui-checked": {
+      color: "#F24462",
+    },
     "& .MuiFormControl-root": {
       "& .MuiOutlinedInput-input": {
         paddingTop: "16px",
         paddingBottom: "16px",
         textTransform: "inherit",
         color: "#fff",
-        fontSize: "14px",
-
       },
       "&:hover .MuiOutlinedInput-notchedOutline": {
         borderColor: "#fff",
@@ -26,6 +30,6 @@ const useStyles = makeStyles({
       },
     },
   },
-});
+}));
 
 export default useStyles;
