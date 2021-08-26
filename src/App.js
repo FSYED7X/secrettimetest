@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// routes
+import Router from './routes';
+// theme
+// import ThemeConfig from './theme';
+// components
+import ScrollToTop from './components/ScrollToTop';
+import { Box, createTheme, CssBaseline } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
 
-function App() {
+// ----------------------------------------------------------------------
+
+export default function App() {
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      {/* <ThemeConfig> */}
+      <CssBaseline />
+      <ScrollToTop />
+      <Router />
+      {/* </ThemeConfig> */}
+    </ThemeProvider >
   );
 }
-
-export default App;
