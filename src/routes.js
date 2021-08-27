@@ -1,16 +1,13 @@
+import { Fragment } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-// layouts
-// import DashboardLayout from './layouts/dashboard';
 import AuthLayout from './layouts/AuthLayout';
-// Pages
+import TheLayout from './layouts/TheLayout';
 import Login from './pages/Auth/Login';
+import Home from './pages/Home';
 import Register from './pages/Auth/Register';
-import NotFound from './pages/Auth/404/Page404';
-
-// ----------------------------------------------------------------------
 
 export default function Router() {
-  return <AuthLayout>
+  return <Fragment>
     <Switch>
       <Route
         exact
@@ -19,14 +16,31 @@ export default function Router() {
           return <Redirect to="/login" />;
         }}
       />
-      <Route path="/login">
-        <Login />
+
+      <Route exact path={["/login", "/register", "/"]}>
+        <AuthLayout>
+          {/* <Switch> */}
+          <Route path="/login" exact>
+            <Login />
+          </Route>
+          <Route path="/register" exact>
+            <Register />
+          </Route>
+          {/* </Switch> */}
+        </AuthLayout>
       </Route>
 
-      <Route path="/register">
-        <Register />
+
+      <Route exact path={["/home"]}>
+        <TheLayout>
+          {/* <Switch> */}
+          <Route path="/home" exact>
+            <Home />
+          </Route>
+          {/* </Switch> */}
+        </TheLayout>
       </Route>
     </Switch>
+  </Fragment>
 
-  </AuthLayout>
 }

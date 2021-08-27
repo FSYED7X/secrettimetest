@@ -1,17 +1,8 @@
 import React from "react";
-import { Box, Button, Grid, Link, Slider, Typography } from "@material-ui/core";
-import {
-  ArrowBackIosRounded,
-  ArrowForward,
-  AutorenewRounded,
-} from "@material-ui/icons";
-import { Formik } from "formik";
+import { Box, Button, Typography } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
-import FormRadio from "../../../components/SHARED/FormComponents/FormRadio";
-
-const TheSlider = styled(Slider)(({ theme }) => ({
-  color: "#F24462!important",
-}));
+import { useStore } from "../../../store";
+import { Link } from "react-router-dom";
 
 const TheButton = styled(Button)(({ theme }) => ({
   background: "#F24462",
@@ -22,7 +13,9 @@ const TheButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function Screen4({ setScreen }) {
+export default function Screen4() {
+  const { data } = useStore();
+
   return (
     <Box mt={5}>
       <Box textAlign="center">
@@ -78,7 +71,8 @@ export default function Screen4({ setScreen }) {
       <Box textAlign="center" mt={3}>
         <Typography variant="h4">Profile Completed</Typography>
         <Typography variant="body2" color="#767676" marginTop={1}>
-          YOU’RE ONE STEP AWAY FROM MEETING GENEROUS GENTS
+          YOU’RE ONE STEP AWAY FROM MEETING GENEROUS{" "}
+          {data.gender === "male" ? "LADIES" : "GENTS"}
         </Typography>
       </Box>
 
@@ -106,6 +100,7 @@ export default function Screen4({ setScreen }) {
             textDecorationColor: "#fff",
             cursor: "pointer",
           }}
+          to="/home"
         >
           Later, take me to My profile
         </Link>

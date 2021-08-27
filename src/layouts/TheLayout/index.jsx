@@ -3,11 +3,11 @@ import { Box } from "@material-ui/core";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
-AuthLayout.propTypes = {
+TheLayout.propTypes = {
   children: PropTypes.node,
 };
 
-export default function AuthLayout({ children }) {
+export default function TheLayout({ children }) {
   return (
     <Box
       bgcolor="#000"

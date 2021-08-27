@@ -9,13 +9,16 @@ import { Formik } from "formik";
 import { styled } from "@material-ui/styles";
 import FormRadio from "../../../components/SHARED/FormComponents/FormRadio";
 import { useStore } from "../../../store";
+import * as Yup from "yup";
+import useStyles from "./useStyle";
 
 const TheSlider = styled(Slider)(({ theme }) => ({
   color: "#F24462!important",
 }));
 
-export default function Screen3({ setScreen }) {
-  const { data, setData } = useStore();
+export default function Screen3() {
+  const { goForward, goBack, data, setData } = useStore();
+  const classes = useStyles();
 
   return (
     <div>
@@ -47,19 +50,24 @@ export default function Screen3({ setScreen }) {
           smoker: data.smoker,
           occupation: data.occupation,
         }}
+        validationSchema={Yup.object().shape({
+          education: Yup.string().required("Education is required"),
+          smoker: Yup.string().required("Smoking status is required"),
+          occupation: Yup.string().required("Occupation is required"),
+        })}
         onSubmit={(values, { setSubmitting }) => {
-          setScreen(3);
+          goForward();
           setData(values);
           setSubmitting(false);
         }}
       >
-        {({ handleSubmit, isValid, dirty, values, setFieldValue }) => {
+        {({ handleSubmit, isValid, dirty, values, setFieldValue, errors }) => {
           const TheButton = styled(Button)(({ theme }) => ({
-            background: "#F24462",
+            background: isValid && dirty ? "#F24462" : "#222327",
             borderRadius: "7px",
             padding: theme.spacing(1),
             "&:hover": {
-              background: "#F24462",
+              background: isValid && dirty ? "#F24462" : "#222327",
             },
           }));
 
@@ -114,6 +122,7 @@ export default function Screen3({ setScreen }) {
 
                 <FormRadio
                   name="education"
+                  error={errors.education}
                   label="Level of education completed?"
                   py={2}
                   options={[
@@ -128,6 +137,7 @@ export default function Screen3({ setScreen }) {
 
                 <FormRadio
                   name="smoker"
+                  error={errors.smoker}
                   label="Are you a smoker?"
                   py={2}
                   options={["Yes", "No"]}
@@ -136,6 +146,7 @@ export default function Screen3({ setScreen }) {
                 <FormRadio
                   name="occupation"
                   label="Your occupation"
+                  error={errors.occupation}
                   py={2}
                   options={[
                     "Administrat/Secretar",
@@ -148,14 +159,14 @@ export default function Screen3({ setScreen }) {
                   ]}
                 />
 
-                <Box mt={2} mb={6}>
+                <Box mt={2} mb={6} className={classes.bottomNext}>
                   <Grid container spacing={1}>
                     <Grid item xs={3}>
                       <TheBackButton
                         fullWidth
                         variant="contained"
                         size="large"
-                        onClick={() => setScreen(1)}
+                        onClick={goBack}
                       >
                         &nbsp;
                         <ArrowBackIosRounded />

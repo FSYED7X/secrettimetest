@@ -1,19 +1,12 @@
 import { Box, Button, Grid, Typography, useTheme } from "@material-ui/core";
-import {
-  AddRounded,
-  ArrowBackIosRounded,
-  ArrowForward,
-} from "@material-ui/icons";
+import { ArrowBackIosRounded, ArrowForward } from "@material-ui/icons";
 import { Formik } from "formik";
 import React from "react";
-import ButtonRadio from "../../../components/SHARED/FormComponents/ButtonRadio";
 import FormInput from "../../../components/SHARED/FormComponents/FormInput";
-import FormPassword from "../../../components/SHARED/FormComponents/FormPassword";
 import * as Yup from "yup";
 import { styled } from "@material-ui/styles";
 import useStyles from "./useStyle";
 import FormMultiline from "../../../components/SHARED/FormComponents/FormMultiline";
-import FormRadio from "../../../components/SHARED/FormComponents/FormRadio";
 import { useStore } from "../../../store";
 
 const TheImagePicker = styled(Box)(({ theme }) => ({
@@ -82,10 +75,10 @@ function getBase64(file) {
   });
 }
 
-export default function Screen2({ setScreen }) {
+export default function Screen2() {
   const classes = useStyles();
   const theme = useTheme();
-  const { data, setData } = useStore();
+  const { goForward, goBack, data, setData } = useStore();
 
   return (
     <div>
@@ -166,13 +159,19 @@ export default function Screen2({ setScreen }) {
           images: data.images,
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setScreen(2);
+          goForward();
           setData(values);
           setSubmitting(false);
         }}
         validationSchema={Yup.object().shape({
-          tagline: Yup.string().required("Tagline is required"),
-          offer: Yup.string().required("Field Required"),
+          tagline: Yup.string()
+            .min(8, "* Min 8 - Max 60 characters")
+            .max(60, "* Min 8 - Max 60 characters")
+            .required("Tagline is required"),
+          offer: Yup.string()
+            .min(30, "* Min 30 - Max 350 characters")
+            .max(350, "* Min 30 - Max 350 characters")
+            .required("Field Required"),
           images: Yup.array().min("4", "* Upload at least 4 photos"),
         })}
       >
@@ -191,6 +190,7 @@ export default function Screen2({ setScreen }) {
             background: "#222327",
             borderRadius: "7px",
             padding: theme.spacing(1),
+            minWidth: "none",
             "&:hover": {
               background: "#222327",
             },
@@ -207,13 +207,14 @@ export default function Screen2({ setScreen }) {
           return (
             <form onSubmit={handleSubmit}>
               <Box mt={5}>
-                <Grid container justifyContent='center'>
+                <Grid container justifyContent="center">
                   <Grid item xs={6} sm={4} md={6} lg={12}>
                     <TheImagePicker component={Button} mt={5}>
                       <input
                         type="file"
                         accept=".jpg,.jpeg,.png"
                         onChange={(e) => handleImagePick(e.target.files[0], 0)}
+                        multiple={false}
                       />
                       {values.images[0] ? (
                         <img src={values.images[0]} alt="" />
@@ -248,6 +249,7 @@ export default function Screen2({ setScreen }) {
                             onChange={(e) =>
                               handleImagePick(e.target.files[0], index + 1)
                             }
+                            multiple={false}
                           />
                           {values.images[index + 1] ? (
                             <img src={values.images[index + 1]} alt="" />
@@ -292,14 +294,14 @@ export default function Screen2({ setScreen }) {
                   rows={5}
                 />
 
-                <Box mt={2} mb={6}>
+                <Box mt={2} mb={6} className={classes.bottomNext}>
                   <Grid container spacing={1}>
                     <Grid item xs={3}>
                       <TheBackButton
                         fullWidth
                         variant="contained"
                         size="large"
-                        onClick={() => setScreen(0)}
+                        onClick={goBack}
                       >
                         &nbsp;
                         <ArrowBackIosRounded />

@@ -23,11 +23,13 @@ export const useStore = create(
         images: [],
         unit: "inches",
         height: "140",
-        education: "Graduate degree",
-        smoker: "No",
-        occupation: "Food services",
+        education: "",
+        smoker: "",
+        occupation: "",
       },
-      //   setData: (values) => set((state) => ({state.data:{ ...state.data, ...values}})),
+      screen: 0,
+      goForward: () => set((state) => ({ screen: state.screen + 1 })),
+      goBack: () => set((state) => ({ screen: state.screen - 1 })),
       setData: (values) =>
         set((state) => ({ data: { ...state.data, ...values } })),
       set: (path, val) =>

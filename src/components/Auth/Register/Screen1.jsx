@@ -1,5 +1,5 @@
-import { Box, Button, Typography } from "@material-ui/core";
-import { ArrowForward } from "@material-ui/icons";
+import { Box, Button, Grid, Typography } from "@material-ui/core";
+import { ArrowBackIosRounded, ArrowForward } from "@material-ui/icons";
 import { styled } from "@material-ui/styles";
 import { Formik } from "formik";
 import React from "react";
@@ -8,9 +8,20 @@ import FormInput from "../../../components/SHARED/FormComponents/FormInput";
 import FormPassword from "../../../components/SHARED/FormComponents/FormPassword";
 import * as Yup from "yup";
 import { useStore } from "../../../store";
+import useStyles from "./useStyle";
 
-export default function Screen1({ setScreen }) {
-  const { data, setData } = useStore();
+const TheBackButton = styled(Button)(({ theme }) => ({
+  background: "#222327",
+  borderRadius: "7px",
+  padding: theme.spacing(1),
+  "&:hover": {
+    background: "#222327",
+  },
+}));
+
+export default function Screen1() {
+  const { goForward, goBack, data, setData } = useStore();
+  const classes = useStyles();
   return (
     <div>
       <Box textAlign="center" mt={3}>
@@ -31,7 +42,7 @@ export default function Screen1({ setScreen }) {
           ethnicity: data.ethnicity,
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setScreen(1);
+          goForward();
           setData(values);
           setSubmitting(false);
         }}
@@ -47,7 +58,7 @@ export default function Screen1({ setScreen }) {
             .required("Email Required"),
         })}
       >
-        {({ handleSubmit, isValid, dirty }) => {
+        {({ handleSubmit, isValid, dirty, errors }) => {
           const TheButton = styled(Button)(({ theme }) => ({
             background: isValid && dirty ? "#F24462" : "#222327",
             borderRadius: "7px",
@@ -104,17 +115,34 @@ export default function Screen1({ setScreen }) {
                   py={2}
                 />
 
-                <Box mt={2} mb={6}>
-                  <TheButton
-                    fullWidth
-                    variant="contained"
-                    size="large"
-                    onClick={handleSubmit}
-                  >
-                    Next&nbsp;&nbsp;
-                    <ArrowForward />
-                  </TheButton>
+                <Box mt={2} mb={6} className={classes.bottomNext}>
+                  <Grid container spacing={1}>
+                    <Grid item xs={3}>
+                      <TheBackButton
+                        fullWidth
+                        variant="contained"
+                        size="large"
+                        onClick={goBack}
+                      >
+                        &nbsp;
+                        <ArrowBackIosRounded />
+                        &nbsp;
+                      </TheBackButton>
+                    </Grid>
+                    <Grid item xs={9}>
+                      <TheButton
+                        fullWidth
+                        variant="contained"
+                        size="large"
+                        onClick={handleSubmit}
+                      >
+                        Next&nbsp;&nbsp;
+                        <ArrowForward />
+                      </TheButton>
+                    </Grid>
+                  </Grid>
                 </Box>
+
                 <Box color="#767676" textAlign="center" mt={5}>
                   By clicking "Next" I certify that I'am at least 18 years old
                   and agree to Secret Time{" "}

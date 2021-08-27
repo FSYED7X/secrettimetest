@@ -3,10 +3,10 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <Box px={7} py={2} borderTop="1px solid #4F4E54" sx={{ mb: 10 }}>
-      <Grid container justifyContent="space-between" alignItems="center">
+    <Box px={7} py={2} borderTop='1px solid #4F4E54'>
+      <Grid container justifyContent='space-between' alignItems='center'>
         <Grid item xs={12} lg={5} md={6}>
-          <Box textAlign="center">
+          <Box textAlign='center'>
             {["About", "Mobile", "Terms", "Privacy", "Help", "Press"].map(
               (item, index) => (
                 <Button variant="text" style={{ color: "#6C6C6C" }}>
