@@ -11,6 +11,7 @@ import FormRadio from "../../../components/SHARED/FormComponents/FormRadio";
 import { useStore } from "../../../store";
 import * as Yup from "yup";
 import useStyles from "./useStyle";
+import TheBackButton from "./TheBackButton";
 
 const TheSlider = styled(Slider)(({ theme }) => ({
   color: "#F24462!important",
@@ -70,16 +71,6 @@ export default function Screen3() {
               background: isValid && dirty ? "#F24462" : "#222327",
             },
           }));
-
-          const TheBackButton = styled(Button)(({ theme }) => ({
-            background: "#222327",
-            borderRadius: "7px",
-            padding: theme.spacing(1),
-            "&:hover": {
-              background: "#222327",
-            },
-          }));
-
           return (
             <form onSubmit={handleSubmit}>
               <Box>
@@ -173,7 +164,7 @@ export default function Screen3() {
                         &nbsp;
                       </TheBackButton>
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={12} sm={9}>
                       <TheButton
                         fullWidth
                         variant="contained"

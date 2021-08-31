@@ -1,4 +1,11 @@
-import { Box, Button, Grid, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Grid,
+  Hidden,
+  IconButton,
+  Typography,
+} from "@material-ui/core";
 import { ArrowBackIosRounded, ArrowForward } from "@material-ui/icons";
 import { styled } from "@material-ui/styles";
 import { Formik } from "formik";
@@ -9,22 +16,34 @@ import FormPassword from "../../../components/SHARED/FormComponents/FormPassword
 import * as Yup from "yup";
 import { useStore } from "../../../store";
 import useStyles from "./useStyle";
-
-const TheBackButton = styled(Button)(({ theme }) => ({
-  background: "#222327",
-  borderRadius: "7px",
-  padding: theme.spacing(1),
-  "&:hover": {
-    background: "#222327",
-  },
-}));
+import TheBackButton from "./TheBackButton";
 
 export default function Screen1() {
   const { goForward, goBack, data, setData } = useStore();
   const classes = useStyles();
   return (
     <div>
-      <Box textAlign="center" mt={3}>
+      <Hidden smUp>
+        <Box mb={5}>
+          <Box textAlign="center" pr={2}>
+            <IconButton
+              onClick={goBack}
+              color="inherit"
+              style={{ float: "left" }}
+              size="small"
+            >
+              <ArrowBackIosRounded fontSize="small" />
+            </IconButton>
+            {data.gender === "male" ? "GENTLEMEN" : "LADIES"}
+          </Box>
+
+          <div style={{ clear: "both" }}></div>
+
+          <Box className={classes.smallline}></Box>
+        </Box>
+      </Hidden>
+
+      <Box className={classes.heading} mt={3}>
         <Typography variant="h4">Let's sign you up.</Typography>
         <Typography variant="body1" color="#767676">
           Unlock the Valut.
@@ -129,7 +148,7 @@ export default function Screen1() {
                         &nbsp;
                       </TheBackButton>
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={12} sm={9}>
                       <TheButton
                         fullWidth
                         variant="contained"

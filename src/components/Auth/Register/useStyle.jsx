@@ -8,9 +8,17 @@ const useStyles = makeStyles((theme) => ({
     width: "30%",
     marginTop: theme.spacing(2),
     margin: "auto",
-    // border: "1px solid",
-    // borderImageSource:
-    //   "linear-gradient(270deg, rgba(250, 120, 155, 0.0001) -12.35%, #F02D4E 38.45%, rgba(242, 67, 98, 0.0001) 91.33%)",
+  },
+  smallline: {
+    background:
+      "linear-gradient(270deg, rgba(250, 120, 155, 0.0001) -12.35%, #F02D4E 38.45%, rgba(242, 67, 98, 0.0001) 91.33%)",
+    height: "2px",
+    width: "10%",
+    marginTop: theme.spacing(0.5),
+    margin: "auto",
+  },
+  mobileBack: {
+    float: "left",
   },
   genderBtns: {
     background: "#fff",
@@ -32,6 +40,12 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
       padding: theme.spacing(2),
       zIndex: 99,
+    },
+  },
+  heading: {
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "left",
     },
   },
 }));

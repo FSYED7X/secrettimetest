@@ -1,6 +1,8 @@
 import { Box, Grid} from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 import React from "react";
+import {makeStyles} from "@material-ui/styles"
+
 import { Link, useLocation } from "react-router-dom";
 import { get } from "lodash";
 
@@ -10,11 +12,21 @@ const StyledLink = styled(Link)(({ theme }) => ({
   cursor: "pointer",
 }));
 
+
+const useStyles = makeStyles((theme) => ({
+  navbar: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+}));
+
 export default function NavBar() {
   const location = useLocation();
+  const classes = useStyles();
   
   return (
-    <Box borderBottom="1px solid #4F4E54">
+    <Box borderBottom="1px solid #4F4E54" className={classes.navbar}>
       <Grid container justifyContent="center">
         <Grid item lg={10} xs={11}>
           <Box pt={2} pb={1.5}>

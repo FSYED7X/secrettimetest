@@ -8,6 +8,7 @@ import { styled } from "@material-ui/styles";
 import useStyles from "./useStyle";
 import FormMultiline from "../../../components/SHARED/FormComponents/FormMultiline";
 import { useStore } from "../../../store";
+import TheBackButton from "./TheBackButton";
 
 const TheImagePicker = styled(Box)(({ theme }) => ({
   aspectRatio: "1/1",
@@ -186,16 +187,6 @@ export default function Screen2() {
             },
           }));
 
-          const TheBackButton = styled(Button)(({ theme }) => ({
-            background: "#222327",
-            borderRadius: "7px",
-            padding: theme.spacing(1),
-            minWidth: "none",
-            "&:hover": {
-              background: "#222327",
-            },
-          }));
-
           const handleImagePick = (file, index) => {
             getBase64(file).then((base64) => {
               let imgs = [...values.images];
@@ -308,7 +299,7 @@ export default function Screen2() {
                         &nbsp;
                       </TheBackButton>
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={12} sm={9}>
                       <TheButton
                         fullWidth
                         variant="contained"

@@ -19,25 +19,21 @@ export default function Router() {
 
       <Route exact path={["/login", "/register", "/"]}>
         <AuthLayout>
-          {/* <Switch> */}
           <Route path="/login" exact>
             <Login />
           </Route>
           <Route path="/register" exact>
             <Register />
           </Route>
-          {/* </Switch> */}
         </AuthLayout>
       </Route>
 
 
       <Route exact path={["/home"]}>
         <TheLayout>
-          {/* <Switch> */}
           <Route path="/home" exact>
             <Home />
           </Route>
-          {/* </Switch> */}
         </TheLayout>
       </Route>
     </Switch>
